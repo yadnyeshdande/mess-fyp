@@ -1,4 +1,6 @@
+'use client'
 import Link from "next/link"
+import React, { useEffect, useState } from 'react';
 import {
   Activity,
   ArrowUpRight,
@@ -44,7 +46,69 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+
+interface Student {
+  0: string; // Name
+  1: string; // Mess ID
+  2: string; // Mail ID
+  3: string; // Count
+  4: string; // Account Balance
+  5: string; // Meals Remaining
+}
+
+
 export function Dashboard() {
+  const [students, setStudents] = useState<Student[]>([]);
+
+  // const fetchStudents = async () => {
+  //   try {
+  //     const response = await fetch('/api/sheets');
+  //     const data = await response.json();
+  //     // Skip the first two rows (headers)
+  //     const students = data.slice(2);
+  //     setStudents(students.slice(0, 10));
+  //   } catch (error) {
+  //     console.error('Error fetching students:', error);
+  //   }
+  // };
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        'https://sheets.googleapis.com/v4/spreadsheets/1nmleRPBIENBzo4G8wCgt7LrtRalN-vVleF2PWCBXPfI/values/F%3AK?dateTimeRenderOption=FORMATTED_STRING&majorDimension=ROWS&valueRenderOption=FORMATTED_VALUE&key=AIzaSyCTTCfo1vYeJafPWRmZbCgm4OvOlrMok9E'
+      );
+      const data = await response.json();
+      // Skip the first two rows (headers)
+      const students = data.values.slice(2);
+      return students.slice(0, 10);
+    } catch (error) {
+      console.error('Error fetching students:', error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      const students = await fetchData();
+      setStudents(students);
+    };
+  
+    fetchStudents();
+  }, []);
+
+  // useEffect(() => {
+  //   const fetchStudents = async () => {
+  //     try {
+  //       const response = await fetch('/api/students');
+  //       const data = await response.json();
+  //       setStudents(data.slice(0, 10));
+  //     } catch (error) {
+  //       console.error('Error fetching students:', error);
+  //     }
+  //   };
+ 
+  //   fetchStudents();
+  // }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -187,106 +251,26 @@ export function Dashboard() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Vishal Dhangar</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        vrdhangar_b20el.vjti.ic.in
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Sale
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Approved
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-23
-                    </TableCell>
-                    <TableCell className="text-right">₹250.00</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Paras Sutar</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        ppsutar_b20el.vjti.ic.in
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Refund
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Declined
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-24
-                    </TableCell>
-                    <TableCell className="text-right">₹150.00</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Ritik Mattami</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        rmattami_b20el.vjti.ic.in
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Subscription
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Approved
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-25
-                    </TableCell>
-                    <TableCell className="text-right">₹350.00</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Sanika Salgar</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        ssalgar_b20el.vjti.ic.in
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Sale
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Approved
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-26
-                    </TableCell>
-                    <TableCell className="text-right">₹450.00</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Yadnyesh Dande</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        yrdande_b21@vjti.ic.in
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Sale
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Approved
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-27
-                    </TableCell>
-                    <TableCell className="text-right">₹550.00</TableCell>
-                  </TableRow>
+                  {students.map((student, index) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        <div className="font-medium">{student[0]}</div>
+                        <div className="hidden text-sm text-muted-foreground md:inline">
+                          {student[2]}
+                        </div>
+                      </TableCell>
+                      <TableCell className="hidden xl:table-column">{student[1]}</TableCell>
+                      <TableCell className="hidden xl:table-column">
+                        <Badge className="text-xs" variant="outline">
+                          {student[3]}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
+                        --
+                      </TableCell>
+                      <TableCell className="text-right">₹{student[4]}</TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </CardContent>
@@ -372,4 +356,4 @@ export function Dashboard() {
       </main>
     </div>
   )
-}
+} 
