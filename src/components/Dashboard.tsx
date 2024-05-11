@@ -110,6 +110,7 @@ export function Dashboard() {
   // }, []);
 
   return (
+
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-4xl font-bold md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -186,7 +187,7 @@ export function Dashboard() {
             <CardContent>
               <div className="text-2xl font-bold">543</div>
               <p className="text-xs text-muted-foreground">
-                +180.1% from last month
+                Total no. of students
               </p>
             </CardContent>
           </Card>
@@ -198,7 +199,7 @@ export function Dashboard() {
             <CardContent>
               <div className="text-2xl font-bold">12</div>
               <p className="text-xs text-muted-foreground">
-                +19% from last month
+                No. of Students Went Home
               </p>
             </CardContent>
           </Card>
@@ -210,7 +211,7 @@ export function Dashboard() {
             <CardContent>
               <div className="text-2xl font-bold">531</div>
               <p className="text-xs text-muted-foreground">
-                +201 since last hour
+                Present Students
               </p>
             </CardContent>
           </Card>
@@ -347,6 +348,34 @@ export function Dashboard() {
                   </p>
                   <p className="text-sm text-muted-foreground">
                     Moong-Usal & Shrikhanda Chole Puri
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <Avatar className="hidden h-9 w-9 sm:flex">
+                  <AvatarImage src="/avatars/01.png" alt="Avatar" />
+                  <AvatarFallback>S</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-1">
+                  <p className="text-sm font-medium leading-none">
+                    Friday
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Chiken + Sweet 
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <Avatar className="hidden h-9 w-9 sm:flex">
+                  <AvatarImage src="/avatars/01.png" alt="Avatar" />
+                  <AvatarFallback>S</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-1">
+                  <p className="text-sm font-medium leading-none">
+                    Saturday
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Pav Bhaji + Sweet 
                   </p>
                 </div>
               </div>
